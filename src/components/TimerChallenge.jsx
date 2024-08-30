@@ -6,9 +6,9 @@ function TimerChallenge({ title, targetTime }) {
   const timer = useRef();
   const dialog = useRef();
 
-  const [timeRemaining, setTimeRemaining] = useState(targetTime * 1000);
+  const [timeRemaining, setTimeRemaining] = useState((targetTime * 1000) + 1);
 
-  const timerIsActive = timeRemaining > 0 && timeRemaining < targetTime * 1000;
+  const timerIsActive = timeRemaining > 0 && timeRemaining < (targetTime * 1000) + 1;
 
   if (timeRemaining <= 0) {
     clearInterval(timer.current);
@@ -16,7 +16,7 @@ function TimerChallenge({ title, targetTime }) {
   }
 
   function handleReset() {
-    setTimeRemaining(targetTime * 1000);
+    setTimeRemaining((targetTime * 1000));
   }
 
   function handleStart() {
@@ -34,7 +34,7 @@ function TimerChallenge({ title, targetTime }) {
     <>
       <ResultModal
         ref={dialog}
-        targetTime={targetTime}
+        targetTime={targetTime + 1}
         remainingTime={timeRemaining}
         onReset={handleReset}
       />
